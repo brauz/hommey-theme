@@ -256,8 +256,10 @@
           {% when 'title' %}
             {% if product.metafields.custom.bundle_discount != blank and is_bundle %}
               <span class="cart-discount__label show--mobile">
-                <span class="cart-discount__title product-label product-label--meta">
-                  <span> Bundle Savings {{ product.metafields.custom.bundle_discount }}% Off </span>
+                <span class="cart-discount__title product-label product-label--bundle-discount">
+                  <span>
+                    <span> Bundle Savings {{ product.metafields.custom.bundle_discount }}% Off </span>
+                  </span>
                 </span>
               </span>
             {% endif %}
@@ -386,8 +388,10 @@
             {% when 'title' %}
               {% if product.metafields.custom.bundle_discount != blank and is_bundle %}
                 <span class="cart-discount__label show--desktop">
-                  <span class="cart-discount__title product-label product-label--meta">
-                    <span> Bundle Savings {{ product.metafields.custom.bundle_discount }}% Off </span>
+                  <span class="cart-discount__title product-label product-label--bundle-discount">
+                    <span>
+                      <span> Bundle Savings {{ product.metafields.custom.bundle_discount }}% Off </span>
+                    </span>
                   </span>
                 </span>
               {% endif %}
@@ -397,8 +401,10 @@
                   class="cart-discount__label {% unless show_preorder_label %}hidden{% endunless %}"
                   data-preorder-ui
                 >
-                  <span class="cart-discount__title product-label product-label--meta preorder">
-                    <span> Pre Order </span>
+                  <span class="cart-discount__title product-label product-label--preorder">
+                    <span>
+                      <span> Pre Order </span>
+                    </span>
                   </span>
                 </span>
               {% endif %}
@@ -846,8 +852,17 @@
                           </script>
                         {% endif %}
 
-                        <button class="button find-in-store" type="button" onclick="window.Brauz_open_reserve_in_store_dialog()">
-                          <img src="{{ 'location-marker.svg' | asset_url }}" alt="location-marker">
+                        <button
+                          class="button find-in-store"
+                          type="button"
+                          onclick="window.Brauz_open_reserve_in_store_dialog()"
+                        >
+                          <img
+                            src="{{ 'location-marker.svg' | asset_url }}"
+                            alt="location-marker"
+                            width="15"
+                            height="15"
+                          >
                           <span>Find In Store</span>
                         </button>
                         <div
@@ -857,7 +872,10 @@
                           data-hodv="{{ product.has_only_default_variant }}"
                           style="display: none; width: 0"
                         ></div>
-                        <script src="https://d3aq2u4yw77ivo.cloudfront.net/reserve-in-store/hommey/reserve-in-store.shopify.hommey.prod.js" async></script>
+                        <script
+                          src="https://d3aq2u4yw77ivo.cloudfront.net/reserve-in-store/hommey/reserve-in-store.shopify.hommey.prod.js"
+                          async
+                        ></script>
 
                         {% if block.settings.show_backorder_text == true %}
                           {% unless preorder %}
@@ -1846,6 +1864,35 @@
       "name": "Linked products - sizes",
       "limit": 1,
       "settings": [
+        {
+          "type": "header",
+          "content": "Metafields Method",
+          "info": "Preferred method for this block's content. Will override the Tags Method."
+        },
+        {
+          "type": "paragraph",
+          "content": "Use the Linked Product Sizes metafield to reference the products associated. Needs to be done for each product that is linked."
+        },
+        {
+          "type": "paragraph",
+          "content": "Use the Size Guide metafield to reference the Size Guide page for this product. Needs to be done for each product that is linked."
+        },
+        {
+          "type": "paragraph",
+          "content": "Use the Product Size Object metafield to reference the Size metaobject associated with this product size. Needs to be done for each product that is linked."
+        },
+        {
+          "type": "checkbox",
+          "id": "include_size_image",
+          "label": "Include size image",
+          "info": "Include the size image included in the product size metaobjects.",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Tags Method",
+          "info": "This method will be used if the Metafields are not populated."
+        },
         {
           "type": "checkbox",
           "id": "size-hommey-cushion",
