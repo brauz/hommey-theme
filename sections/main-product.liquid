@@ -852,7 +852,30 @@
                           </script>
                         {% endif %}
 
-                        {%- render 'brauz-find-in-store' -%}
+                        <button
+                          class="button find-in-store"
+                          type="button"
+                          onclick="window.Brauz_open_reserve_in_store_dialog()"
+                        >
+                          <img
+                            src="{{ 'location-marker.svg' | asset_url }}"
+                            alt="location-marker"
+                            width="15"
+                            height="15"
+                          >
+                          <span>Find In Store</span>
+                        </button>
+                        <div
+                          id="brauz-find-in-store-config-product-page"
+                          data-sd="{{ shop.permanent_domain }}"
+                          data-cvi="{{ product.first_available_variant.id }}"
+                          data-hodv="{{ product.has_only_default_variant }}"
+                          style="display: none; width: 0"
+                        ></div>
+                        <script
+                          src="https://d3aq2u4yw77ivo.cloudfront.net/reserve-in-store/hommey/reserve-in-store.shopify.hommey.prod.js"
+                          async
+                        ></script>
 
                         {% if block.settings.show_backorder_text == true %}
                           {% unless preorder %}
@@ -874,7 +897,6 @@
                     {% else %}
                       <div class="buttons-wrapper">
                         {% render 'back-in-stock' %}
-                        {%- render 'brauz-find-in-store' -%}
                         <div class="desktop-only">{% render 'add-to-wishlist' %}</div>
                       </div>
                     {% endif %}
